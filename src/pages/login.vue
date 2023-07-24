@@ -1,12 +1,24 @@
 <script setup lang="ts">
-import {Icon} from '@iconify/vue';
+
+import {useUserStore} from "~/stores/user";
+import { useRouter } from 'vue-router'
 
 definePageMeta({
   layout: "blank",
 });
 
+const router = useRouter()
+const userStore = useUserStore()
+
+
 const redirectGoogleLogin = () => {
-  window.location.href = "https://naver.com"
+  userStore.successLogin()
+  // window.location.href = "https://naver.com"
+}
+
+const login = ()=>{
+  userStore.successLogin()
+  router.push('/')
 }
 </script>
 
@@ -33,11 +45,10 @@ const redirectGoogleLogin = () => {
 <!--              todo 네모박스 체크박스 적용하기-->
               <VCheckbox label="Remember me?"></VCheckbox>
 <!--todo 색깔 통일하기-->
-              <VBtn width="100%">Login</VBtn>
+                <VBtn width="100%" @click="login">Login</VBtn>
             </VCardItem>
             <div class="hr-sect">or</div>
             <VCardItem>
-
               <VImg @click="redirectGoogleLogin" src="google_login.png"/>
             </VCardItem>
             <VCardItem>

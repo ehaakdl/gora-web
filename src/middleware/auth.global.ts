@@ -1,9 +1,14 @@
 // todo 로그인 체크 후 리다이렉션
+import {useUserStore} from "~/stores/user";
+
 export default defineNuxtRouteMiddleware((to) => {
-    if(to.path == '/login'){
+    const userStore = useUserStore()
+    if (to.path == '/login') {
+        userStore.logout()
         return
-    }
-    if (to.path == '/') {
-        return navigateTo('/login')
+    } else {
+        if (!userStore.isLogin) {
+            return navigateTo('/login')
+        }
     }
 });
