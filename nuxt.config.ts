@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     '~/plugins/vuetify/index.ts',
     '~/plugins/pinia-persistedstate/index.ts'
   ],
+  runtimeConfig: {
+    public: {
+      API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:8080/api/v1'
+    }
+  },
   modules: [
     '@pinia/nuxt',
     async (options, nuxt) => {
@@ -18,4 +23,5 @@ export default defineNuxtConfig({
       );
     },
   ],
+
 })
