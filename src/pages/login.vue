@@ -16,7 +16,7 @@ const redirectGoogleLogin = () => {
   // window.location.href = "https://naver.com"
 }
 
-const login = ()=>{
+const onLogin = ()=>{
   userStore.successLogin()
   router.push('/')
 }
@@ -45,7 +45,7 @@ const login = ()=>{
 <!--              todo 네모박스 체크박스 적용하기-->
               <VCheckbox label="Remember me?"></VCheckbox>
 <!--todo 색깔 통일하기-->
-                <VBtn width="100%" @click="login">Login</VBtn>
+                <VBtn width="100%" @click="onLogin">Login</VBtn>
             </VCardItem>
             <div class="hr-sect">or</div>
             <VCardItem>
