@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import logo from '@/public/logo.svg?raw'
 
 import {useUserStore} from "~/stores/user";
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
 
 definePageMeta({
   layout: "blank",
@@ -16,53 +17,93 @@ const redirectGoogleLogin = () => {
   // window.location.href = "https://naver.com"
 }
 
-const onLogin = ()=>{
+const onLogin = () => {
   userStore.successLogin()
   router.push('/')
 }
 </script>
 
 <template>
-  <VApp id="inspire" style="position:relative">
-    <VContainer
-        style="margin: auto"
-    >
-      <VRow
-          justify="center"
+  <div class="auth-wrapper d-flex align-center justify-center pa-4">
+    <VCard width="348">
+      <VCardItem>
+
+        <div class="d-flex justify-center">
+          <div v-html="logo"/>
+          <VCardTitle class="pl-3 font-weight-semibold text-2xl text-uppercase">Gora</VCardTitle>
+        </div>
+
+      </VCardItem>
+
+      <VCardText class="pt-2">
+        <h5 class="text-h5 font-weight-semibold mb-1 text-center">
+          Welcome to Gora!
+        </h5>
+      </VCardText>
+
+
+      <VCardText>
+        <VForm @submit.prevent="() => {}">
+          <VRow>
+            <VCol cols="12">
+              <!--              todo VTextField 색깔 통일하기-->
+              <VTextField
+                  base-color=""
+                  bg-color="#FFFFFF"
+                  type="email"
+                  label="Email"
+              />
+            </VCol>
+
+            <VCol cols="12">
+              <VTextField
+                  label="Password"
+                  type="password"
+                  base-color=""
+                  bg-color="#FFFFFF"
+              />
+
+            </VCol>
+          </VRow>
+
+          <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4">
+            <!--              todo 네모박스 체크박스 적용하기-->
+            <VCheckbox
+              label="Remember Me"
+            />
+            <RouterLink  to="{name: forget-password}">forget password</RouterLink>
+          </div>
+          <!--todo 색깔 통일하기-->
+          <VBtn @click="onLogin" block type="submit">Login</VBtn>
+
+        </VForm>
+      </VCardText>
+
+      <div class="hr-sect">or</div>
+
+      <VCol
+          class="text-center text-base"
       >
-        <VCol cols="12" sm="4">
-          <VCard>
-            <VCardTitle class="text-center">Login</VCardTitle>
+        <RouterLink class="text-primary ms-2" to="{name: 'register'}">
+          Create an account
+        </RouterLink>
+      </VCol>
 
-            <VCardItem>
-              <VLabel>Email</VLabel>
-<!--              todo VTextField 색깔 통일하기-->
-              <VTextField base-color="" bg-color="#FFFFFF" type="text"></VTextField>
+      <VCardItem>
+        <div class="d-flex justify-center">
+          <VImg @click="redirectGoogleLogin" src="google_login.png"/>
+        </div>
+      </VCardItem>
 
-              <VLabel>Password</VLabel>
-              <VTextField base-color="" bg-color="#FFFFFF" type="password"></VTextField>
-
-<!--              todo 네모박스 체크박스 적용하기-->
-              <VCheckbox label="Remember me?"></VCheckbox>
-<!--todo 색깔 통일하기-->
-                <VBtn width="100%" @click="onLogin">Login</VBtn>
-            </VCardItem>
-            <div class="hr-sect">or</div>
-            <VCardItem>
-              <VImg @click="redirectGoogleLogin" src="google_login.png"/>
-            </VCardItem>
-            <VCardItem>
-
-            </VCardItem>
-
-          </VCard>
-        </VCol>
-      </VRow>
-    </VContainer>
-  </VApp>
+    </VCard>
+  </div>
 </template>
 
 <style scoped>
+.auth-wrapper {
+  min-block-size: calc(var(--vh, 1vh) * 100);
+}
+
 .hr-sect {
   display: flex;
   flex-basis: 100%;
@@ -71,6 +112,7 @@ const onLogin = ()=>{
   font-size: 12px;
   margin: 8px 0px;
 }
+
 .hr-sect::before,
 .hr-sect::after {
   content: "";
