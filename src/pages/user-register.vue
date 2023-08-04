@@ -9,17 +9,10 @@ definePageMeta({
 });
 
 const router = useRouter()
-const userStore = useUserStore()
 
+// todo 회원가입 api 연동
+const register = () => {
 
-const redirectGoogleLogin = () => {
-  const config = useRuntimeConfig()
-  window.location.href = config.public.API_URL + '/oauth2/authorize/google'
-}
-
-const onLogin = () => {
-  userStore.successLogin()
-  router.push('/')
 }
 </script>
 
@@ -43,7 +36,7 @@ const onLogin = () => {
 
 
       <VCardText>
-        <VForm @submit.prevent="() => {}">
+        <VForm @submit.prevent="register">
           <VRow>
             <VCol cols="12">
               <!--              todo VTextField 색깔 통일하기-->
@@ -66,34 +59,11 @@ const onLogin = () => {
             </VCol>
           </VRow>
 
-          <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4">
-            <!--              todo 네모박스 체크박스 적용하기-->
-            <VCheckbox
-              label="Remember Me"
-            />
-            <RouterLink  to="{name: forget-password}">forget password</RouterLink>
-          </div>
           <!--todo 색깔 통일하기-->
-          <VBtn @click="onLogin" block type="submit">Login</VBtn>
+          <VBtn class="mt-10" block type="submit">SignUp</VBtn>
 
         </VForm>
       </VCardText>
-
-      <div class="hr-sect">or</div>
-
-      <VCol
-          class="text-center text-base"
-      >
-        <RouterLink class="text-primary ms-2" to="{name: 'register'}">
-          Create an account
-        </RouterLink>
-      </VCol>
-
-      <VCardItem>
-        <div class="d-flex justify-center">
-          <VImg @click="redirectGoogleLogin" src="google_login.png"/>
-        </div>
-      </VCardItem>
 
     </VCard>
   </div>
@@ -102,25 +72,5 @@ const onLogin = () => {
 <style scoped>
 .auth-wrapper {
   min-block-size: calc(var(--vh, 1vh) * 100);
-}
-
-.hr-sect {
-  display: flex;
-  flex-basis: 100%;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.35);
-  font-size: 12px;
-  margin: 8px 0px;
-}
-
-.hr-sect::before,
-.hr-sect::after {
-  content: "";
-  flex-grow: 1;
-  background: rgba(0, 0, 0, 0.35);
-  height: 1px;
-  font-size: 0px;
-  line-height: 0px;
-  margin: 0px 16px;
 }
 </style>

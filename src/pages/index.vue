@@ -15,7 +15,6 @@ const onDownload = async () => {
   await $fetch(config.public.API_BASE_URL + `/download/client`, {
     method: "GET",
     async onResponse({request, response, options}) {
-      debugger
       const url = window.URL.createObjectURL(response._data);
 
       const link = document.createElement('a');

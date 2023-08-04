@@ -3,8 +3,11 @@ import {useUserStore} from "~/stores/user";
 
 export default defineNuxtRouteMiddleware((to) => {
     const userStore = useUserStore()
+
     if (to.path == '/login') {
         userStore.logout()
+        return
+    } if(to.path == '/user-register' || to.path == '/email-verify'){
         return
     } else {
         if (!userStore.isLogin) {
