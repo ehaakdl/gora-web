@@ -44,7 +44,8 @@ const startTimer = () => {
       sendButtonText.value = 'Send'
       isReSend.value = false
       visibleMessage.value = true
-      message.value = '시간이 만료됐습니다.'
+      const { $i18n } = useNuxtApp();
+      message.value = $i18n.t('times_up')
       visibleTimer.value = false
       containerWidth.value = '100%'
       resetTimer()
@@ -99,7 +100,7 @@ const resetTimer = () => {
             <VLabel v-if="visibleTimer" class="ml-5">{{ durationSec }}</VLabel>
           </div>
 
-          <VLabel class="pt-3" v-if="visibleMessage"> {{ $t('times_up')}}</VLabel>
+          <VLabel class="pt-3" v-if="visibleMessage"> {{ message }}</VLabel>
 
           <!--todo 색깔 통일하기-->
           <VBtn class="mt-10" block type="submit">{{ sendButtonText }}</VBtn>
