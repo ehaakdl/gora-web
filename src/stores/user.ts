@@ -6,22 +6,25 @@ export const useUserStore = defineStore({
 
     // a function that returns a fresh state
     state: () => ({
-        isLogined: false
+
     }),
 
     // optional getters
     getters: {
-        isLogin: (state) => state.isLogined,
+        isLogin: (state) => {
+            return localStorage.getItem('auth.access_token') != null;
+        },
     },
 
     // optional actions
     actions: {
         logout() {
-            this.isLogined = false
+            localStorage.removeItem('auth.access_token')
+            const accessToken = useCookie('auth.access_token')
+            accessToken.value = null
         },
-        successLogin() {
-            this.isLogined = true
+        successLogin(accessToken : string) {
+            localStorage.setItem('auth.access_token', accessToken)
         }
     },
-    persist:true
 })
