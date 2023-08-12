@@ -1,5 +1,6 @@
 
 import {useUserStore} from "~/stores/user";
+import {userApi} from "~/api/userApi"
 
 export default defineNuxtRouteMiddleware((to) => {
     const userStore = useUserStore()
