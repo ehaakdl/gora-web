@@ -10,13 +10,6 @@ export default defineNuxtConfig({
         '~/plugins/vuetify/index.ts',
         '~/plugins/pinia-persistedstate/index.ts',
     ],
-
-    runtimeConfig: {
-        public: {
-            API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:8080/api/v1',
-            API_URL: process.env.API_URL || 'http://localhost:8080'
-        }
-    },
     modules: [
         '@pinia/nuxt',
         async (options, nuxt) => {
@@ -26,7 +19,25 @@ export default defineNuxtConfig({
             );
         },
         '@nuxtjs/i18n',
+        'nuxt-proxy'
     ],
+    runtimeConfig: {
+        public: {
+            API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:8080',
+            API_URL: process.env.API_URL || 'http://localhost:8080'
+        },
+        proxy: {
+            options: [
+                {
+                    target: 'http://localhost:8080',
+                    changeOrigin: true,
+                    pathFilter: [
+                        '/api',
+                    ],
+                },
+            ],
+        },
+    },
     i18n: {
         locales: [
             {
@@ -39,28 +50,5 @@ export default defineNuxtConfig({
         defaultLocale: 'ko',
         lazy: true,
         langDir: 'locales/',
-    },
-    // todo 아래 설정이 프록시 서버 설정 코드 작동안함 원인 분석
-    nitro: {
-        devProxy: {
-            '/api/': "http://127.0.0.1:8080",
-        },
-        routeRules: {
-            '/api/': {
-                proxy: {
-                    to: process.env.API_BASE_URL || 'http://localhost:8080'
-                }
-            },
-        }
-    },
-    vite: {
-        server: {
-            proxy: {
-                "/api/": {
-                    target: process.env.API_BASE_URL || 'http://localhost:8080',
-                    changeOrigin: true,
-                },
-            },
-        },
     },
 })
