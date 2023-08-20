@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import logo from '@/public/logo.svg?raw'
+import logo from '@/public/logo.svg?raw';
 
-import {useUserStore} from "~/stores/user";
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router';
 
 definePageMeta({
   layout: "blank",

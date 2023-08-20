@@ -22,14 +22,13 @@ export default defineNuxtConfig({
         'nuxt-proxy'
     ],
     runtimeConfig: {
-        public: {
-            API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:8080',
-            API_URL: process.env.API_URL || 'http://localhost:8080'
+        public:{
+            BASE_URL: process.env.BASE_URL || 'http://localhost:8080'
         },
         proxy: {
             options: [
                 {
-                    target: 'http://localhost:8080',
+                    target: process.env.BASE_URL || 'http://localhost:8080',
                     changeOrigin: true,
                     pathFilter: [
                         '/api',

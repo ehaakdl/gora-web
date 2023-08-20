@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import logo from '@/public/logo.svg?raw'
+import logo from '@/public/logo.svg?raw';
 
-import {useUserStore} from "~/stores/user";
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router';
+import { useUserStore } from "~/stores/user";
 
 definePageMeta({
   layout: "blank",
@@ -14,10 +14,10 @@ const userStore = useUserStore()
 
 const redirectGoogleLogin = () => {
   const config = useRuntimeConfig()
-  window.location.href = config.public.API_URL + '/oauth2/authorize/google'
+  window.location.href = config.public.BASE_URL + '/oauth2/authorize/google'
 }
 
-const onLogin = () => {
+const onLogin = async () => {
   userStore.successLogin()
   router.push('/')
 }

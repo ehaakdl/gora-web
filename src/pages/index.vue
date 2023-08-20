@@ -13,7 +13,7 @@
 const onDownload = async () => {
   const config = useRuntimeConfig()
 
-  await $fetch(config.public.API_BASE_URL + `/download/client`, {
+  await $fetch(`/api/v1/download/client`, {
     method: "GET",
     async onResponse({request, response, options}) {
       const url = window.URL.createObjectURL(response._data);
@@ -26,6 +26,10 @@ const onDownload = async () => {
       link.click();
 
       document.body.removeChild(link);
+    },
+    onRequest({request, options}) {
+      options.headers = options.headers || {}
+      options.headers.Authorization = localStorage.getItem('auth.access_token')
     },
     onRequestError(context: FetchContext & { error: Error }): Promise<void> | void {
       console.log(context.error)

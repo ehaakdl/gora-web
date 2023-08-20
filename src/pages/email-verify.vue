@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import logo from '@/public/logo.svg?raw'
+import logo from '@/public/logo.svg?raw';
 
-import {useRouter} from 'vue-router'
-import {useNuxtApp} from "#app";
+import { useNuxtApp } from "#app";
+import { useRouter } from 'vue-router';
 
 definePageMeta({
   layout: "blank",

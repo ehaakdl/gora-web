@@ -1,13 +1,12 @@
 export class userApi {
 
 
-    logout(accessToken: string) {
-        const config = useRuntimeConfig()
-        return useFetch('/api/logout', {
+    async logout(accessToken:string) {
+        return await useFetch('/api/v1/logout', {
             onRequest({request, options}) {
                 // Set the request headers
                 options.headers = options.headers || {}
-                options.headers.Authorization = 'test'
+                options.headers.Authorization = accessToken
             }
         })
     }

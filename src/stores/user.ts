@@ -1,5 +1,5 @@
-import {defineStore} from "pinia"
-import {userApi} from "~/api/userApi";
+import { defineStore } from "pinia";
+import { userApi } from "~/api/userApi";
 
 export const useUserStore = defineStore({
     // unique id of the store across your application
@@ -20,13 +20,14 @@ export const useUserStore = defineStore({
     // optional actions
     actions: {
         logout() {
-            localStorage.removeItem('auth.access_token')
-            const accessToken = useCookie('auth.access_token')
-            accessToken.value = null
             const useUserApi = new userApi()
-            useUserApi.logout()
-
-
+            const accessToken:string|null = localStorage.getItem('auth.access_token')
+            localStorage.removeItem('auth.access_token')
+            if(accessToken == null){
+                return
+            }
+            
+            useUserApi.logout(accessToken)
         },
         successLogin(accessToken : string) {
             localStorage.setItem('auth.access_token', accessToken)
