@@ -9,7 +9,6 @@ definePageMeta({
 });
 const DEFAULT_DURATION = 4
 
-const router = useRouter()
 const sendButtonText = ref('Send')
 const isReSend = ref(false)
 const durationSec = ref(DEFAULT_DURATION)
@@ -66,12 +65,12 @@ const resetTimer = () => {
   <div class="auth-wrapper d-flex align-center justify-center pa-4">
     <VCard width="348">
       <VCardItem>
-
         <div class="d-flex justify-center">
-          <div v-html="logo"/>
-          <VCardTitle class="pl-3 font-weight-semibold text-2xl text-uppercase">Gora</VCardTitle>
+          <div v-html="logo" />
+          <VCardTitle class="pl-3 font-weight-semibold text-2xl text-uppercase">
+            Gora
+          </VCardTitle>
         </div>
-
       </VCardItem>
 
       <VCardText class="pt-2">
@@ -83,31 +82,44 @@ const resetTimer = () => {
 
       <VCardText>
         <VForm @submit.prevent="sendVerify">
-
           <div class="d-flex">
             <!--              todo VTextField 색깔 통일하기-->
             <div :style="{ width: containerWidth }">
               <VTextField
 
-                  base-color=""
-                  bg-color="#FFFFFF"
-                  type="email"
-                  label="Email"
-                  :readonly="isReSend"
+                base-color=""
+                bg-color="#FFFFFF"
+                type="email"
+                label="Email"
+                :readonly="isReSend"
               />
             </div>
 
-            <VLabel v-if="visibleTimer" class="ml-5">{{ durationSec }}</VLabel>
+            <VLabel
+              v-if="visibleTimer"
+              class="ml-5"
+            >
+              {{ durationSec }}
+            </VLabel>
           </div>
 
-          <VLabel class="pt-3" v-if="visibleMessage"> {{ message }}</VLabel>
+          <VLabel
+            v-if="visibleMessage"
+            class="pt-3"
+          >
+            {{ message }}
+          </VLabel>
 
           <!--todo 색깔 통일하기-->
-          <VBtn class="mt-10" block type="submit">{{ sendButtonText }}</VBtn>
-
+          <VBtn
+            class="mt-10"
+            block
+            type="submit"
+          >
+            {{ sendButtonText }}
+          </VBtn>
         </VForm>
       </VCardText>
-
     </VCard>
   </div>
 </template>

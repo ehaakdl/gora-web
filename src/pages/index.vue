@@ -11,7 +11,6 @@
 <script setup lang="ts">
 
 const onDownload = async () => {
-  const config = useRuntimeConfig()
 
   await $fetch(`/api/v1/download/client`, {
     method: "GET",
@@ -30,12 +29,6 @@ const onDownload = async () => {
     onRequest({request, options}) {
       options.headers = options.headers || {}
       options.headers.Authorization = localStorage.getItem('auth.access_token')
-    },
-    onRequestError(context: FetchContext & { error: Error }): Promise<void> | void {
-      console.log(context.error)
-    },
-    onResponseError(context: FetchContext & { response: FetchResponse<R> }): Promise<void> | void {
-      console.log(context.error)
     }
   })
 }

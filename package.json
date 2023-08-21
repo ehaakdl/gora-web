@@ -9,11 +9,15 @@
     "dev": "nuxt dev --dotenv .env.dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext .js,.ts,.vue src",
+    "lint:fix": "eslint --ext .js,.ts,.vue src --fix"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@types/node": "^18.16.19",
+    "eslint": "^8.47.0",
+    "eslint-plugin-vue": "^9.17.0",
     "nuxt": "^3.6.5"
   },
   "dependencies": {
@@ -21,6 +25,8 @@
     "@mdi/js": "^7.2.96",
     "@nuxtjs/i18n": "^8.0.0-rc.2",
     "@pinia/nuxt": "^0.4.11",
+    "@rushstack/eslint-patch": "^1.3.3",
+    "@vue/eslint-config-typescript": "^11.0.3",
     "nuxt-proxy": "^0.4.1",
     "pinia": "^2.1.4",
     "pinia-plugin-persistedstate": "^3.2.0",

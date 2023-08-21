@@ -10,29 +10,27 @@ definePageMeta({
 
 const router = useRouter()
 const userStore = useUserStore()
-
-
 const redirectGoogleLogin = () => {
   const config = useRuntimeConfig()
   window.location.href = config.public.BASE_URL + '/oauth2/authorize/google'
 }
 
 const onLogin = async () => {
-  userStore.successLogin()
+  userStore.successLogin('mock access')
   router.push('/')
 }
 </script>
 
 <template>
-  <div class="auth-wrapper d-flex align-center justify-center pa-4">
+     <div class="auth-wrapper d-flex align-center justify-center pa-4">
     <VCard width="348">
       <VCardItem>
-
         <div class="d-flex justify-center">
-          <div v-html="logo"/>
-          <VCardTitle class="pl-3 font-weight-semibold text-2xl text-uppercase">Gora</VCardTitle>
+          <div v-html="logo" />
+          <VCardTitle class="pl-3 font-weight-semibold text-2xl text-uppercase">
+            Gora
+          </VCardTitle>
         </div>
-
       </VCardItem>
 
       <VCardText class="pt-2">
@@ -48,21 +46,20 @@ const onLogin = async () => {
             <VCol cols="12">
               <!--              todo VTextField 색깔 통일하기-->
               <VTextField
-                  base-color=""
-                  bg-color="#FFFFFF"
-                  type="email"
-                  label="Email"
+                base-color=""
+                bg-color="#FFFFFF"
+                type="email"
+                label="Email"
               />
             </VCol>
 
             <VCol cols="12">
               <VTextField
-                  label="Password"
-                  type="password"
-                  base-color=""
-                  bg-color="#FFFFFF"
+                label="Password"
+                type="password"
+                base-color=""
+                bg-color="#FFFFFF"
               />
-
             </VCol>
           </VRow>
 
@@ -71,30 +68,44 @@ const onLogin = async () => {
             <VCheckbox
               label="Remember Me"
             />
-            <RouterLink  to="{name: forget-password}">forget password</RouterLink>
+            <RouterLink to="{name: forget-password}">
+              forget password
+            </RouterLink>
           </div>
           <!--todo 색깔 통일하기-->
-          <VBtn @click="onLogin" block type="submit">Login</VBtn>
-
+          <VBtn
+            block
+            type="submit"
+            @click="onLogin"
+          >
+            Login
+          </VBtn>
         </VForm>
       </VCardText>
 
-      <div class="hr-sect">or</div>
+      <div class="hr-sect">
+        or
+      </div>
 
       <VCol
-          class="text-center text-base"
+        class="text-center text-base"
       >
-        <RouterLink class="text-primary ms-2" to="{name: 'register'}">
+        <RouterLink
+          class="text-primary ms-2"
+          to="{name: 'register'}"
+        >
           Create an account
         </RouterLink>
       </VCol>
 
       <VCardItem>
         <div class="d-flex justify-center">
-          <VImg @click="redirectGoogleLogin" src="google_login.png"/>
+          <VImg
+            src="google_login.png"
+            @click="redirectGoogleLogin"
+          />
         </div>
       </VCardItem>
-
     </VCard>
   </div>
 </template>

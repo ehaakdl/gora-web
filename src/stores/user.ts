@@ -12,7 +12,7 @@ export const useUserStore = defineStore({
 
     // optional getters
     getters: {
-        isLogin: (state) => {
+        isLogin: () => {
             return localStorage.getItem('auth.access_token') != null;
         },
     },

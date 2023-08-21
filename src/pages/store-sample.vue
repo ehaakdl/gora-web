@@ -1,7 +1,11 @@
 <template>
   <ClientOnly>
     <div>
-      <input type="button" @click="store.increment()" value="increment">
+      <input
+        type="button"
+        value="increment"
+        @click="store.increment()"
+      >
       {{ store.count }}
       {{ store.doubleCount }}
     </div>
