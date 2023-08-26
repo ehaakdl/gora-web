@@ -3,6 +3,9 @@
   "overrides": {
     "vue": "3"
   },
+  "engines": {
+    "node": "^16.21.0"
+  },
   "private": true,
   "scripts": {
     "build": "nuxt build",
