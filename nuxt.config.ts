@@ -1,8 +1,6 @@
 import vuetify from "vite-plugin-vuetify";
 
 export default defineNuxtConfig({
-    // todo ssr 사용하게 수정
-    ssr: false,
     srcDir: 'src',
     css: ['vuetify/lib/styles/main.sass'],
     build: {transpile: ["vuetify"]},

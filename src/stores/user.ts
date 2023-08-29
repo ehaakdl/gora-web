@@ -12,13 +12,14 @@ export const useUserStore = defineStore({
 
     // optional getters
     getters: {
-        isLogin: () => {
-            return localStorage.getItem('auth.access_token') != null;
-        },
+        
     },
 
     // optional actions
     actions: {
+        isLogin() {
+            return localStorage.getItem('auth.access_token') != null;
+        },
         logout() {
             const useUserApi = new userApi()
             const accessToken:string|null = localStorage.getItem('auth.access_token')

@@ -2,6 +2,10 @@
 import { useUserStore } from "~/stores/user";
 
 export default defineNuxtRouteMiddleware((to) => {
+    if(process.server){
+        return
+    }
+    
     const userStore = useUserStore()
     if(to.query.access){
         userStore.successLogin(<string>to.query.access)
@@ -16,7 +20,7 @@ export default defineNuxtRouteMiddleware((to) => {
     }else if(to.path == '/user-register' || to.path == '/email-verify'){
         return
     } else {
-        if (!userStore.isLogin) {
+        if (!userStore.isLogin()) {
             return navigateTo('/login')
         }
     }
