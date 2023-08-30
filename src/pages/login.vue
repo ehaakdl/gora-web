@@ -2,31 +2,31 @@
 import logo from '@/public/logo.svg?raw';
 
 import { useRouter } from 'vue-router';
-import { useUserStore } from "~/stores/user";
+import { useUserStore } from '~/stores/user';
 
 definePageMeta({
-  layout: "blank",
+  layout: 'blank',
 });
 
-const router = useRouter()
-const userStore = useUserStore()
+const router = useRouter();
+const userStore = useUserStore();
 const redirectGoogleLogin = () => {
-  const config = useRuntimeConfig()
-  window.location.href = config.public.BASE_URL + '/oauth2/authorize/google'
-}
+  const config = useRuntimeConfig();
+  window.location.href = `${config.public.BASE_URL}/oauth2/authorize/google`;
+};
 
 const onLogin = async () => {
-  userStore.successLogin('mock access')
-  router.push('/')
-}
+  userStore.successLogin('mock access');
+  router.push('/');
+};
 </script>
 
 <template>
-     <div class="auth-wrapper d-flex align-center justify-center pa-4">
+  <div class="auth-wrapper d-flex align-center justify-center pa-4">
     <VCard width="348">
       <VCardItem>
         <div class="d-flex justify-center">
-          <div v-html="logo" />
+          <div v-html="logo"></div>
           <VCardTitle class="pl-3 font-weight-semibold text-2xl text-uppercase">
             Gora
           </VCardTitle>
@@ -38,7 +38,6 @@ const onLogin = async () => {
           Welcome to Gora!
         </h5>
       </VCardText>
-
 
       <VCardText>
         <VForm @submit.prevent="() => {}">

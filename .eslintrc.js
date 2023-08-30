@@ -23,11 +23,29 @@ module.exports = {
     // es6에서 사용될 때 사용
     sourceType: 'module',
   },
+  settings: {
+    'import/resolver': {
+      typescript: {
+      },
+    },
+  },
+  globals: {
+    defineStore: false,
+    useFetch: false,
+    navigateTo: false,
+    defineNuxtConfig: false,
+    defineNuxtRouteMiddleware: false,
+    $fetch: false,
+    definePageMeta: false,
+    useRuntimeConfig: false,
+  },
   ignorePatterns: [],
   rules: {
     'vue/script-indent': ['error', 2, { baseIndent: 0 }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'vue/multi-word-component-names': 'off',
+    'import/no-extraneous-dependencies': 0,
+    'import/extensions': 0, // 파일 확장자 명시
   },
 };
