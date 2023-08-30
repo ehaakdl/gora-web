@@ -13,8 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import {useCounterStore} from "@/stores/counter"
-let store
+import { useCounterStore } from '@/stores/counter';
+
+let store;
 if (process.client) {
   store = useCounterStore();
 }

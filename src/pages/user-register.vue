@@ -2,13 +2,13 @@
 import logo from '@/public/logo.svg?raw';
 
 definePageMeta({
-  layout: "blank",
+  layout: 'blank',
 });
 
 // todo 회원가입 api 연동
 const register = () => {
 
-}
+};
 </script>
 
 <template>
@@ -28,7 +28,6 @@ const register = () => {
           Welcome to Gora!
         </h5>
       </VCardText>
-
 
       <VCardText>
         <VForm @submit.prevent="register">

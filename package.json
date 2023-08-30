@@ -19,9 +19,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@types/node": "^18.16.19",
-    // 이 버전 아니면 충돌남
     "@typescript-eslint/eslint-plugin": "^5.59.1",
-    // 이 버전 아니면 충돌남
     "@typescript-eslint/parser": "^5.62.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.48.0",

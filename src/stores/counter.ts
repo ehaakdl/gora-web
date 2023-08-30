@@ -1,13 +1,15 @@
-import { defineStore } from "pinia"
+import { defineStore } from 'pinia';
 
-export const useCounterStore = defineStore('counter', () => {
-    const count = ref(0)
-    function increment() {
-        count.value++
-    }
-    const doubleCount = computed(() => count.value * 2)
+const useCounterStore = defineStore('counter', () => {
+  const count = ref(0);
+  function increment() {
+    count.value += 1;
+  }
+  const doubleCount = computed(() => count.value * 2);
 
-    return { count, increment, doubleCount }
+  return { count, increment, doubleCount };
 }, {
-    persist: true
-})
+  persist: true,
+});
+
+export default useCounterStore;

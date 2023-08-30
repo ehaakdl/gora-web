@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
-import userApi from '~/api/userApi';
+import userApi from '@/api/userApi';
 
-export const useUserStore = defineStore({
+const useUserStore = defineStore({
   // unique id of the store across your application
   id: 'user',
 
@@ -35,3 +35,5 @@ export const useUserStore = defineStore({
     },
   },
 });
+
+export default useUserStore;

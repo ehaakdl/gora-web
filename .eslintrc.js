@@ -30,6 +30,9 @@ module.exports = {
     },
   },
   globals: {
+    defineNuxtPlugin: false,
+    computed: false,
+    ref: false,
     defineStore: false,
     useFetch: false,
     navigateTo: false,
@@ -39,13 +42,15 @@ module.exports = {
     definePageMeta: false,
     useRuntimeConfig: false,
   },
-  ignorePatterns: [],
+  ignorePatterns: ['**/store-sample.vue'],
   rules: {
+    'class-methods-use-this': 'off',
     'vue/script-indent': ['error', 2, { baseIndent: 0 }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'vue/multi-word-component-names': 'off',
     'import/no-extraneous-dependencies': 0,
+    'new-cap': 0,
     'import/extensions': 0, // 파일 확장자 명시
   },
 };

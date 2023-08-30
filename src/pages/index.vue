@@ -1,20 +1,25 @@
 <template>
-  <VApp id="inspire" style="position:relative">
+  <VApp
+    id="inspire"
+    style="position:relative"
+  >
     <VContainer
-        style="margin: auto"
+      style="margin: auto"
     >
-      <VImg @click="onDownload" src="download_btn.png"></VImg>
+      <VImg
+        src="download_btn.png"
+        @click="onDownload"
+      />
     </VContainer>
   </VApp>
-
 </template>
 <script setup lang="ts">
 
 const onDownload = async () => {
-
-  await $fetch(`/api/v1/download/client`, {
-    method: "GET",
-    async onResponse({request, response, options}) {
+  await $fetch('/api/v1/logout', {
+    method: 'GET',
+    async onResponse({ response }) {
+      // eslint-disable-next-line no-underscore-dangle
       const url = window.URL.createObjectURL(response._data);
 
       const link = document.createElement('a');
@@ -26,10 +31,9 @@ const onDownload = async () => {
 
       document.body.removeChild(link);
     },
-    onRequest({request, options}) {
-      options.headers = options.headers || {}
-      options.headers.Authorization = localStorage.getItem('auth.access_token')
-    }
-  })
-}
+    headers: {
+      Authorization: localStorage.getItem('auth.access_token') || '',
+    },
+  });
+};
 </script>

@@ -2,7 +2,7 @@
 import logo from '@/public/logo.svg?raw';
 
 import { useRouter } from 'vue-router';
-import { useUserStore } from '~/stores/user';
+import useUserStore from '@/stores/user';
 
 definePageMeta({
   layout: 'blank',
@@ -26,7 +26,7 @@ const onLogin = async () => {
     <VCard width="348">
       <VCardItem>
         <div class="d-flex justify-center">
-          <div v-html="logo"></div>
+          <div v-html="logo" />
           <VCardTitle class="pl-3 font-weight-semibold text-2xl text-uppercase">
             Gora
           </VCardTitle>

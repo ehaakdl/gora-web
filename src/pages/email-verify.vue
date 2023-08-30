@@ -1,64 +1,63 @@
 <script setup lang="ts">
 import logo from '@/public/logo.svg?raw';
 
-import { useNuxtApp } from "#app";
-import { useRouter } from 'vue-router';
+import { useNuxtApp } from '#app';
 
 definePageMeta({
-  layout: "blank",
+  layout: 'blank',
 });
-const DEFAULT_DURATION = 4
 
-const sendButtonText = ref('Send')
-const isReSend = ref(false)
-const durationSec = ref(DEFAULT_DURATION)
-const intervalId = ref()
-const message = ref('')
-const visibleMessage = ref(false)
-const visibleTimer = ref(false)
-const containerWidth = ref('100%')
+const DEFAULT_DURATION = 4;
 
-const sendVerify = () => {
-  if (intervalId.value) {
-    resetTimer()
-  }
+const sendButtonText = ref('Send');
+const isReSend = ref(false);
+const durationSec = ref(DEFAULT_DURATION);
+const intervalId = ref();
+const message = ref('');
+const visibleMessage = ref(false);
+const visibleTimer = ref(false);
+const containerWidth = ref('100%');
 
-  if (!isReSend.value) {
-    isReSend.value = true
-    sendButtonText.value = 'Resend'
-  }
-
-  containerWidth.value = '80%'
-  visibleTimer.value = true
-  visibleMessage.value = false
-
-  startTimer()
-// todo 메일 발송 api 연동
-//   router.push('/user-register')
-}
-
-const startTimer = () => {
-  intervalId.value = setInterval(() => {
-    if (durationSec.value <= 0) {
-      sendButtonText.value = 'Send'
-      isReSend.value = false
-      visibleMessage.value = true
-      const { $i18n } = useNuxtApp();
-      message.value = $i18n.t('times_up')
-      visibleTimer.value = false
-      containerWidth.value = '100%'
-      resetTimer()
-    } else {
-      durationSec.value--;
-    }
-
-  }, 1000);
-}
-
-const resetTimer = () => {
+function resetTimer() {
   durationSec.value = DEFAULT_DURATION;
   clearInterval(intervalId.value);
 }
+
+function startTimer() {
+  intervalId.value = setInterval(() => {
+    if (durationSec.value <= 0) {
+      sendButtonText.value = 'Send';
+      isReSend.value = false;
+      visibleMessage.value = true;
+      const { $i18n } = useNuxtApp();
+      message.value = $i18n.t('times_up');
+      visibleTimer.value = false;
+      containerWidth.value = '100%';
+      resetTimer();
+    } else {
+      durationSec.value -= -1;
+    }
+  }, 1000);
+}
+
+const sendVerify = () => {
+  if (intervalId.value) {
+    resetTimer();
+  }
+
+  if (!isReSend.value) {
+    isReSend.value = true;
+    sendButtonText.value = 'Resend';
+  }
+
+  containerWidth.value = '80%';
+  visibleTimer.value = true;
+  visibleMessage.value = false;
+
+  startTimer();
+// todo 메일 발송 api 연동
+//   router.push('/user-register')
+};
 </script>
 
 <template>
@@ -78,7 +77,6 @@ const resetTimer = () => {
           {{ $t('please_auth_email') }}
         </h6>
       </VCardText>
-
 
       <VCardText>
         <VForm @submit.prevent="sendVerify">
