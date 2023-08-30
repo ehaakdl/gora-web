@@ -16,7 +16,7 @@
 <script setup lang="ts">
 
 const onDownload = async () => {
-  await $fetch('/api/v1/logout', {
+  await $fetch('/api/v1/download/client', {
     method: 'GET',
     async onResponse({ response }) {
       // eslint-disable-next-line no-underscore-dangle
