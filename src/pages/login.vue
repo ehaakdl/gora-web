@@ -3,6 +3,7 @@ import logo from '@/public/logo.svg?raw';
 
 import { useRouter } from 'vue-router';
 import useUserStore from '@/stores/user';
+import userApi from '@/api/userApi';
 
 definePageMeta({
   layout: 'blank',
@@ -10,14 +11,24 @@ definePageMeta({
 
 const router = useRouter();
 const userStore = useUserStore();
+const user = new userApi();
+const email = ref('');
+const password = ref('');
+
 const redirectGoogleLogin = () => {
   const config = useRuntimeConfig();
   window.location.href = `${config.public.BASE_URL}/oauth2/authorize/google`;
 };
-
-const onLogin = async () => {
-  userStore.successLogin('mock access');
-  router.push('/');
+// todo 
+function onLogin() {
+  const userReq = {
+    email: email.value,
+    password: password.value,
+  };
+  user.login(userReq).then((accessToken:string) => {
+    userStore.successLogin(accessToken);
+    router.push('/');
+  });
 };
 </script>
 
@@ -40,11 +51,12 @@ const onLogin = async () => {
       </VCardText>
 
       <VCardText>
-        <VForm @submit.prevent="() => {}">
+        <VForm @submit.prevent="onLogin">
           <VRow>
             <VCol cols="12">
               <!--              todo VTextField 색깔 통일하기-->
               <VTextField
+                v-model="email"
                 base-color=""
                 bg-color="#FFFFFF"
                 type="email"
@@ -54,6 +66,7 @@ const onLogin = async () => {
 
             <VCol cols="12">
               <VTextField
+                v-model="password"
                 label="Password"
                 type="password"
                 base-color=""
@@ -75,7 +88,6 @@ const onLogin = async () => {
           <VBtn
             block
             type="submit"
-            @click="onLogin"
           >
             Login
           </VBtn>

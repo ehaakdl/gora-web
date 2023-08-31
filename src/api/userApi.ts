@@ -6,4 +6,15 @@ export default class userApi {
       },
     });
   }
+// todo 
+  async login(userReq) {
+    const accessToken:string = await $fetch('/api/v1/login', {
+      method: 'POST',
+      body: userReq,
+      headers: {
+        contentType: 'application/json',
+      },
+    });
+    return accessToken;
+  }
 }
