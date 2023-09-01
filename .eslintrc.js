@@ -42,7 +42,7 @@ module.exports = {
     definePageMeta: false,
     useRuntimeConfig: false,
   },
-  ignorePatterns: ['**/store-sample.vue'],
+  ignorePatterns: [''],
   rules: {
     'class-methods-use-this': 'off',
     'vue/script-indent': ['error', 2, { baseIndent: 0 }],
