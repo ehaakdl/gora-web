@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import logo from '@/public/logo.svg?raw';
+import { CommonResponse } from 'types.d/common';
 
 import { useRouter } from 'vue-router';
 import useUserStore from '@/stores/user';
@@ -12,24 +13,26 @@ definePageMeta({
 const router = useRouter();
 const userStore = useUserStore();
 const user = new userApi();
-const email = ref('');
-const password = ref('');
+const email = ref();
+const password = ref();
 
-const redirectGoogleLogin = () => {
+function redirectGoogleLogin() {
   const config = useRuntimeConfig();
   window.location.href = `${config.public.BASE_URL}/oauth2/authorize/google`;
-};
-// todo 
-function onLogin() {
+}
+
+function login() {
   const userReq = {
     email: email.value,
     password: password.value,
   };
-  user.login(userReq).then((accessToken:string) => {
+  // todo 에러 처리
+  user.login(userReq).then((response:CommonResponse) => {
+    const accessToken:string = response.data as string;
     userStore.successLogin(accessToken);
     router.push('/');
   });
-};
+}
 </script>
 
 <template>
@@ -51,7 +54,7 @@ function onLogin() {
       </VCardText>
 
       <VCardText>
-        <VForm @submit.prevent="onLogin">
+        <VForm @submit.prevent="login">
           <VRow>
             <VCol cols="12">
               <!--              todo VTextField 색깔 통일하기-->

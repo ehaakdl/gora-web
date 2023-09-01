@@ -1,3 +1,6 @@
+import { CommonResponse } from 'types.d/common';
+import { LoginRequest } from 'types.d/user';
+
 export default class userApi {
   async logout(accessToken:string) {
     await $fetch('/api/v1/logout', {
@@ -6,15 +9,16 @@ export default class userApi {
       },
     });
   }
-// todo 
-  async login(userReq) {
-    const accessToken:string = await $fetch('/api/v1/login', {
+
+  async login(req:LoginRequest) {
+    const response:CommonResponse = await $fetch('/api/v1/login', {
       method: 'POST',
-      body: userReq,
+      body: req,
       headers: {
         contentType: 'application/json',
       },
     });
-    return accessToken;
+
+    return response;
   }
 }
