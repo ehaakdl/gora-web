@@ -82,8 +82,8 @@ function login() {
             <VCheckbox
               label="Remember Me"
             />
-            <RouterLink to="{name: forget-password}">
-              forget password
+            <RouterLink to="{name: forgot-password}">
+              forgot password
             </RouterLink>
           </div>
           <!--todo 색깔 통일하기-->
