@@ -1,5 +1,5 @@
 import { CommonResponse } from 'types.d/common';
-import { LoginRequest } from 'types.d/user';
+import { LoginRequest, SignupRequest } from 'types.d/user';
 
 export default class userApi {
   async logout(accessToken:string) {
@@ -12,6 +12,18 @@ export default class userApi {
 
   async login(req:LoginRequest) {
     const response:CommonResponse = await $fetch('/api/v1/login', {
+      method: 'POST',
+      body: req,
+      headers: {
+        contentType: 'application/json',
+      },
+    });
+
+    return response;
+  }
+
+  async signup(req:SignupRequest) {
+    const response:CommonResponse = await $fetch('/api/v1/signup', {
       method: 'POST',
       body: req,
       headers: {

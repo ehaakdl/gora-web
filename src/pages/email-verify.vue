@@ -56,7 +56,7 @@ const sendVerify = () => {
 
   startTimer();
 // todo 메일 발송 api 연동
-//   router.push('/user-register')
+//   router.push('/user/signup')
 };
 </script>
 

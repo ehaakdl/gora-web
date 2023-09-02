@@ -105,7 +105,7 @@ function login() {
       >
         <RouterLink
           class="text-primary ms-2"
-          to="{name: 'register'}"
+          :to="{name: 'signup'}"
         >
           Create an account
         </RouterLink>
