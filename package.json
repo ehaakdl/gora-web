@@ -5,7 +5,7 @@
     "vue": "3"
   },
   "engines": {
-    "node": "^16.21.0"
+    "node": "^16.20.0"
   },
   "private": true,
   "scripts": {
@@ -32,14 +32,14 @@
   },
   "dependencies": {
     "@iconify/vue": "^4.1.1",
+    "@intlify/unplugin-vue-i18n": "^0.11.0",
     "@mdi/js": "^7.2.96",
-    "@nuxtjs/i18n": "^8.0.0-rc.2",
     "@pinia/nuxt": "^0.4.11",
-    "nuxt-proxy": "^0.4.1",
     "pinia": "^2.1.4",
     "pinia-plugin-persistedstate": "^3.2.0",
     "sass": "^1.64.1",
     "vite-plugin-vuetify": "^1.0.2",
+    "vue-i18n": "^9.2.2",
     "vuetify": "^3.3.9"
   }
 }

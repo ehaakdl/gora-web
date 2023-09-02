@@ -1,3 +1,6 @@
+import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "url";
 import vuetify from 'vite-plugin-vuetify';
 
 export default defineNuxtConfig({
@@ -19,36 +22,29 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify());
       });
     },
-    '@nuxtjs/i18n',
-    'nuxt-proxy',
   ],
   runtimeConfig: {
     public: {
       BASE_URL: process.env.BASE_URL || 'http://localhost:8080',
     },
-    proxy: {
-      options: [
-        {
-          target: process.env.BASE_URL || 'http://localhost:8080',
-          changeOrigin: true,
-          pathFilter: [
-            '/api',
-          ],
-        },
-      ],
-    },
+    
   },
-  i18n: {
-    locales: [
-      {
-        code: 'en',
-        file: 'en.json',
+  vite: {
+		plugins: [
+			VueI18nVitePlugin({
+				include: [
+					resolve(dirname(fileURLToPath(import.meta.url)), "./locales/*.json"),
+				],
+			}),
+		],
+	},
+  nitro: {
+    routeRules: {
+      '/api/**': {
+        proxy: {
+          to: 'http://localhost:8080/api/**',
+        },
       },
-      { code: 'ko', file: 'ko.json' },
-    ],
-
-    defaultLocale: 'ko',
-    lazy: true,
-    langDir: 'locales/',
+    },
   },
 });

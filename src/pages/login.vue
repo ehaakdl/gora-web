@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import logo from '@/public/logo.svg?raw';
-import { CommonResponse } from 'types.d/common';
-
-import { useRouter } from 'vue-router';
-import useUserStore from '@/stores/user';
 import userApi from '@/api/userApi';
+import logo from '@/public/logo.svg?raw';
+import useUserStore from '@/stores/user';
+import { CommonResponse } from 'types.d/common';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 definePageMeta({
   layout: 'blank',
 });
 
+const { t } = useI18n();
 const router = useRouter();
 const userStore = useUserStore();
 const user = new userApi();
