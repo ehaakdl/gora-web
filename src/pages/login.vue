@@ -11,7 +11,7 @@ definePageMeta({
 
 const router = useRouter();
 const userStore = useUserStore();
-const user = new userApi();
+const userApiVal = new userApi();
 const email = ref();
 const password = ref();
 
@@ -26,7 +26,7 @@ function login() {
     password: password.value,
   };
   // todo 에러 처리
-  user.login(userReq).then((response:CommonResponse) => {
+  userApiVal.login(userReq).then((response:CommonResponse) => {
     const accessToken:string = response.data as string;
     userStore.successLogin(accessToken);
     router.push('/');
