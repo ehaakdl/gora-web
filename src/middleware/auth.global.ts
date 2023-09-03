@@ -14,7 +14,7 @@ export default defineNuxtRouteMiddleware((to) => {
     userStore.logout();
   } else if (to.path === '/login') { // 무한 리다이렉션 때문에 추가
     userStore.logout();
-  } else if (to.path === '/signup' || to.path === '/email-verify') {
+  } else if (to.path === '/signup' || to.path === '/email/verify') {
     userStore.logout();
   } else if (!userStore.isLogin()) {
     navigateTo('/login');
