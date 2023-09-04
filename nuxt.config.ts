@@ -1,6 +1,6 @@
-import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "url";
+import VueI18nVitePlugin from '@intlify/unplugin-vue-i18n/vite';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'url';
 import vuetify from 'vite-plugin-vuetify';
 
 export default defineNuxtConfig({
@@ -27,17 +27,17 @@ export default defineNuxtConfig({
     public: {
       BASE_URL: process.env.BASE_URL || 'http://localhost:8080',
     },
-    
+
   },
   vite: {
-		plugins: [
-			VueI18nVitePlugin({
-				include: [
-					resolve(dirname(fileURLToPath(import.meta.url)), "./locales/*.json"),
-				],
-			}),
-		],
-	},
+    plugins: [
+      VueI18nVitePlugin({
+        include: [
+          resolve(dirname(fileURLToPath(import.meta.url)), './locales/*.json'),
+        ],
+      }),
+    ],
+  },
   nitro: {
     routeRules: {
       '/api/**': {
