@@ -16,24 +16,18 @@
 <script setup lang="ts">
 
 const onDownload = async () => {
-  await $fetch('/api/v1/download/client', {
+  // not work 
+  $fetch('/api/v1/download/client', {
     method: 'GET',
-    async onResponse({ response }) {
-      // eslint-disable-next-line no-underscore-dangle
-      const url = window.URL.createObjectURL(response._data);
-
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'client.zip');
-
-      document.body.appendChild(link);
-      link.click();
-
-      document.body.removeChild(link);
-    },
-    headers: {
-      Authorization: localStorage.getItem('auth.access_token') || '',
-    },
+  }).then((res) => {
+    console.log(res.size);
+  });
+  
+  // work
+  $fetch(`http://localhost:8080/api/v1/download/client`, {
+    method: 'GET',  
+  }).then((res) => {
+    console.log(res.size);
   });
 };
 </script>
