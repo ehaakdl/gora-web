@@ -1,3 +1,4 @@
+import axios from '@/composable/axios';
 import { CommonResponse } from 'types.d/common';
 import { LoginRequest, SignupRequest } from 'types.d/user';
 
@@ -32,5 +33,11 @@ export default class userApi {
     });
 
     return response;
+  }
+
+  downloadClient() {
+    return axios.get('/api/v1/download/client', {
+      responseType: 'blob',
+    });
   }
 }

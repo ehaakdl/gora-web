@@ -14,20 +14,27 @@
   </VApp>
 </template>
 <script setup lang="ts">
+import userApi from '@/api/userApi';
+
+const userApiInst = new userApi();
 
 const onDownload = async () => {
-  // not work 
-  $fetch('/api/v1/download/client', {
-    method: 'GET',
-  }).then((res) => {
-    console.log(res.size);
-  });
-  
-  // work
-  $fetch(`http://localhost:8080/api/v1/download/client`, {
-    method: 'GET',  
-  }).then((res) => {
-    console.log(res.size);
-  });
+  userApiInst.downloadClient()
+    .then((response) => {
+      const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'client.zip');
+
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+    })
+    .catch((error) => {
+      console.error("Error fetching client:", error);
+    });
 };
 </script>
