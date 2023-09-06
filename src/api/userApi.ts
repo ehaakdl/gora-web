@@ -3,8 +3,8 @@ import { CommonResponse } from 'types.d/common';
 import { LoginRequest, SignupRequest } from 'types.d/user';
 
 export default class userApi {
-  async logout(accessToken:string) {
-    await $fetch('/api/v1/logout', {
+  logout(accessToken:string) {
+    axios.get('/api/v1/logout', {
       headers: {
         Authorization: accessToken,
       },

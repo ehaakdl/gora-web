@@ -8,7 +8,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   console.log('Request made with ', config);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth.access_token') ? localStorage.getItem('auth.access_token') : '';
   if (token) {
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `${token}`;
