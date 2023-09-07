@@ -34,7 +34,7 @@ const onDownload = async () => {
       document.body.removeChild(link);
     })
     .catch((error) => {
-      console.error("Error fetching client:", error);
+      console.error('Error fetching client:', error);
     });
 };
 </script>

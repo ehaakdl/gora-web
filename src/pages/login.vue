@@ -12,8 +12,8 @@ definePageMeta({
 const router = useRouter();
 const userStore = useUserStore();
 const userApiInst = new userApi();
-const email = ref();
-const password = ref();
+const email = ref('');
+const password = ref('');
 
 function redirectGoogleLogin() {
   const config = useRuntimeConfig();
@@ -25,11 +25,14 @@ function login() {
     email: email.value,
     password: password.value,
   };
-  // todo 에러 처리
-  userApiInst.login(userReq).then((response:CommonResponse) => {
-    const accessToken:string = response.data as string;
-    userStore.successLogin(accessToken);
-    router.push('/');
+
+  userApiInst.login(userReq).then((response) => {
+    const commonResponse:CommonResponse = response.data as CommonResponse;
+    if (typeof commonResponse.data === 'string') {
+      const accessToken: string = commonResponse.data;
+      userStore.successLogin(accessToken);
+      router.push('/');
+    }
   });
 }
 </script>

@@ -1,4 +1,8 @@
 {
   "times_up": "times up",
-  "please_auth_email":"Please enter an email for authentication"
+  "please_auth_email":"Please enter an email for authentication",
+  "button":{
+    "email_send_verify":"Send authentication mail",
+    "email_resend_verify":"Resend authentication mail"
+  }
 }

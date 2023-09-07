@@ -1,4 +1,8 @@
 {
   "times_up": "시간이 만료됐습니다.",
-  "please_auth_email":"인증을 위한 이메일을 입력 해주세요"
+  "please_auth_email":"인증을 위한 이메일을 입력 해주세요",
+  "button":{
+    "email_send_verify":"인증 메일 발송",
+    "email_resend_verify":"인증 메일 재발송"
+  }
 }

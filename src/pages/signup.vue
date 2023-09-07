@@ -2,29 +2,44 @@
 import userApi from '@/api/userApi';
 import logo from '@/public/logo.svg?raw';
 import { SignupRequest } from '@/types.d/user';
+import emailApi from '@/api/emailApi';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 definePageMeta({
   layout: 'blank',
 });
 
 const router = useRouter();
-const userApiVal = new userApi();
+const userApiInst = new userApi();
+const emailApiInst = new emailApi();
+const { t } = useI18n();
 
-const email = ref<string>();
-const password = ref<string>();
+const email = ref<string>('');
+const password = ref<string>('');
+const emailFirstSendFlag = ref(false);
+const emailSendBtnName = ref(t('button.email_send_verify'));
 
-// todo 회원가입 api 연동
 const signup = () => {
   const signupRequest:SignupRequest = {
     email: email.value,
     password: password.value,
   };
 
-  userApiVal.signup(signupRequest).then(() => {
+  userApiInst.signup(signupRequest).then(() => {
     router.push('/login');
   });
 };
+
+function sendVerifyEmail() {
+  emailApiInst.sendVerifyMail(email.value).then(() => {
+    if (emailFirstSendFlag.value) {
+      emailSendBtnName.value = t('button.email_resend_verify');
+    } else {
+      emailFirstSendFlag.value = true;
+    }
+  });
+}
 </script>
 
 <template>
@@ -49,7 +64,6 @@ const signup = () => {
         <VForm @submit.prevent="signup">
           <VRow>
             <VCol cols="12">
-              <!--              todo VTextField 색깔 통일하기-->
               <VTextField
                 v-model="email"
                 base-color=""
@@ -57,6 +71,14 @@ const signup = () => {
                 type="email"
                 label="Email"
               />
+              <VBtn
+                class="mt-10"
+                block
+                type="button"
+                @click="sendVerifyEmail"
+              >
+                {{ emailSendBtnName }}
+              </VBtn>
             </VCol>
 
             <VCol cols="12">
