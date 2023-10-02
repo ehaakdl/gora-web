@@ -24,6 +24,7 @@ function login() {
   const userReq = {
     email: email.value,
     password: password.value,
+    isGameClient: true,
   };
 
   userApiInst.login(userReq).then((response) => {
