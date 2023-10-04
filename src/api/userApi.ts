@@ -10,7 +10,6 @@ export default class userApi {
     return axios.post('/api/v1/login', {
       email: req.email,
       password: req.password,
-      isGameClient: req.isGameClient,
     });
   }
 
