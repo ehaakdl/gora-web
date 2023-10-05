@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const instance = axios.create({
   baseURL: process.env.BASE_URL || 'http://localhost:8080',
@@ -17,7 +17,13 @@ instance.interceptors.request.use((config) => {
   Promise.reject(error);
 });
 
-instance.interceptors.response.use((response) => response, (error) => {
+instance.interceptors.response.use((response: AxiosResponse) => {
+  if (response.headers.authorization) {
+    localStorage.setItem('auth.access_token', response.headers?.authorization);
+  }
+
+  return response;
+}, (error) => {
   // 이메일 noti
   Promise.reject(error);
 });
