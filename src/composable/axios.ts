@@ -6,11 +6,15 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth.access_token') ? localStorage.getItem('auth.access_token') : '';
+  const token = localStorage.getItem('auth.access_token');
   if (token) {
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = token;
+    if (config.url === '/api/v1/logout') {
+      localStorage.removeItem('auth.access_token');
+    }
   }
+
   return config;
 }, (error) => {
   // 이메일 noti
