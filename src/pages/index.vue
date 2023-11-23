@@ -8,18 +8,17 @@
     >
       <VImg
         src="download_btn.png"
-        @click="onDownload"
+        @click="clickDownload"
       />
     </VContainer>
   </VApp>
 </template>
 <script setup lang="ts">
-import userApi from '@/api/userApi';
+import useUserStore from '@/stores/userStore';
 
-const userApiInst = new userApi();
-
-const onDownload = async () => {
-  userApiInst.downloadClient()
+const userStore = useUserStore();
+const clickDownload = () => {
+  userStore.downloadGameClient()
     .then((response) => {
       const blob = new Blob([response.data], { type: response.headers['content-type'] });
       const url = URL.createObjectURL(blob);
@@ -37,4 +36,5 @@ const onDownload = async () => {
       console.error('Error fetching client:', error);
     });
 };
+
 </script>

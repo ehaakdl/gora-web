@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import userApi from '@/api/userApi';
+
 import logo from '@/public/logo.svg?raw';
+import useUserStore from '@/stores/userStore';
 import { SignupRequest } from '@/types.d/user';
-import emailApi from '@/api/emailApi';
-import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 definePageMeta({
   layout: 'blank',
 });
 
 const router = useRouter();
-const userApiInst = new userApi();
-const emailApiInst = new emailApi();
 const { t } = useI18n();
+const userStore = useUserStore();
 
 const email = ref<string>('');
 const password = ref<string>('');
@@ -26,20 +25,20 @@ const signup = () => {
     password: password.value,
   };
 
-  userApiInst.signup(signupRequest).then(() => {
+  userStore.signup(signupRequest).then(() => {
     router.push('/login');
   });
 };
 
-function sendVerifyEmail() {
-  emailApiInst.sendVerifyMail(email.value).then(() => {
+const sendVerifyEmail = () => {
+  userStore.sendVerifyUserEmail(email.value).then(() => {
     if (emailFirstSendFlag.value) {
       emailSendBtnName.value = t('button.email_resend_verify');
     } else {
       emailFirstSendFlag.value = true;
     }
   });
-}
+};
 </script>
 
 <template>

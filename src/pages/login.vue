@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import userApi from '@/api/userApi';
 import logo from '@/public/logo.svg?raw';
-import useUserStore from '@/stores/user';
+import useUserStore from '@/stores/userStore';
 import { CommonResponse } from 'types.d/common';
 import { useRouter } from 'vue-router';
 
@@ -9,9 +8,8 @@ definePageMeta({
   layout: 'blank',
 });
 
-const router = useRouter();
 const userStore = useUserStore();
-const userApiInst = new userApi();
+const router = useRouter();
 const email = ref('');
 const password = ref('');
 
@@ -20,21 +18,22 @@ function redirectGoogleLogin() {
   window.location.href = `${config.public.BASE_URL}/oauth2/authorize/google`;
 }
 
-function login() {
+const login = () => {
   const userReq = {
     email: email.value,
     password: password.value,
   };
 
-  userApiInst.login(userReq).then((response) => {
-    const commonResponse:CommonResponse = response.data as CommonResponse;
-    if (typeof commonResponse.data === 'string') {
-      const accessToken: string = commonResponse.data;
-      userStore.successLogin(accessToken);
-      router.push('/');
-    }
-  });
-}
+  userStore.login(userReq)
+    .then((response) => {
+      const commonResponse:CommonResponse = response.data as CommonResponse;
+      if (typeof commonResponse.data === 'string') {
+        const accessToken: string = commonResponse.data;
+        userStore.successLogin(accessToken);
+        router.push('/');
+      }
+    });
+};
 </script>
 
 <template>
@@ -151,3 +150,4 @@ function login() {
   margin: 0px 16px;
 }
 </style>
+stores/userStore

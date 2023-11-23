@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import logo from '@/public/logo.svg?raw';
-import emailApi from '@/api/emailApi';
+import useUserStore from '@/stores/userStore';
 import { useRoute } from 'vue-router';
 
 definePageMeta({
   layout: 'blank',
 });
 const router = useRoute();
-const emailApiInst = new emailApi();
+const userStore = useUserStore();
 const accessToken = router.query.accessToken ? router.query.accessToken : '';
-emailApiInst.verify(accessToken);
+userStore.verifyUserEmail(accessToken);
 
 </script>
 
