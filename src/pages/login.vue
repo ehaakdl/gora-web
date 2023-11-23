@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import logo from '@/public/logo.svg?raw';
 import useUserStore from '@/stores/userStore';
+import { storeToRefs } from 'pinia';
 import { CommonResponse } from 'types.d/common';
 import { useRouter } from 'vue-router';
 
@@ -9,9 +10,8 @@ definePageMeta({
 });
 
 const userStore = useUserStore();
+const { email, password } = storeToRefs(userStore);
 const router = useRouter();
-const email = ref('');
-const password = ref('');
 
 function redirectGoogleLogin() {
   const config = useRuntimeConfig();
@@ -19,12 +19,7 @@ function redirectGoogleLogin() {
 }
 
 const login = () => {
-  const userReq = {
-    email: email.value,
-    password: password.value,
-  };
-
-  userStore.login(userReq)
+  userStore.login()
     .then((response) => {
       const commonResponse:CommonResponse = response.data as CommonResponse;
       if (typeof commonResponse.data === 'string') {
@@ -150,4 +145,3 @@ const login = () => {
   margin: 0px 16px;
 }
 </style>
-stores/userStore

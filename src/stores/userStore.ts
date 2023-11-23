@@ -1,13 +1,15 @@
 import axios from '@/composable/axios';
 import { defineStore } from 'pinia';
-import { LoginRequest, SignupRequest } from 'types.d/user';
+import { LoginRequest, SignupRequest, defautlLoginRequest } from 'types.d/user';
 
 
 
 const useUserStore = defineStore({
   // unique id of the store across your application
   id: 'user',
-
+  state: () => ({
+    loginReq: ref(defautlLoginRequest) as unknown as LoginRequest | null,
+  }),
   // optional actions
   actions: {
     logout() {
@@ -16,10 +18,9 @@ const useUserStore = defineStore({
     successLogin(accessToken : string) {
       localStorage.setItem('auth.access_token', accessToken);
     },
-    login(req:LoginRequest) {
+    login() {
       return axios.post('/api/v1/login', {
-        email: req.email,
-        password: req.password,
+        this.loginReq
       })
     },
 
